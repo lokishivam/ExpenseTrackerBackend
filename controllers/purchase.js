@@ -29,7 +29,7 @@ exports.getBuyPremium = async (req, res) => {
     console.log("done5");
     res.json({ order, key_id: razorpay.key_id });
   } catch (error) {
-    res.status(404).json(error);
+    res.status(404).json(error.message);
   }
 };
 
