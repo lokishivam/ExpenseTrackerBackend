@@ -1,8 +1,8 @@
 const fs = require("fs");
 const currentPath = require("./util/path");
 const cors = require("cors"); //middleware
-const helmet = require("helmet");
-const morgan = require("morgan");
+//const helmet = require("helmet");
+//const morgan = require("morgan");
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -20,13 +20,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(helmet());
+//app.use(helmet());
 
-//doubt..
-const accessLogStream = fs.createWriteStream(`${currentPath}/access.log`, {
-  flags: "a",
-});
-app.use(morgan("combined", { stream: accessLogStream }));
+// const accessLogStream = fs.createWriteStream(`${currentPath}/access.log`, {
+//   flags: "a",
+// });
+// app.use(morgan("combined", { stream: accessLogStream }));
 
 const userRoutes = require("./routes/user");
 const expenseRoutes = require("./routes/expense");
@@ -39,6 +38,14 @@ app.use("/expenses", expenseRoutes);
 app.use("/purchase", purchaseRoutes);
 app.use("/premiumFeatures", premiumFeatureRoutes);
 app.use("/password", passwordRoutes);
+
+app.use((req, res) => {
+  const url = req.url;
+  //console.log(url);
+  const path = `${currentPath}/public${url}`;
+  //console.log(path);
+  res.sendFile(path);
+});
 
 //one to many association
 User.hasMany(Expense);
