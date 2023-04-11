@@ -100,7 +100,7 @@ function premiumFeaturesDisplay() {
   premiumBtn.classList.remove("nonPremium");
   premiumBtn.classList.add("premiumUser");
   premiumBtn.innerHTML = "Premium User";
-  leadershipSection.style.display = "block";
+  leadershipSection.style.display = "inline-block";
   downloadExpense.style.display = "block";
 }
 
