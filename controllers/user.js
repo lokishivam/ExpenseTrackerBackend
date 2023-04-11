@@ -34,12 +34,14 @@ exports.postVerifyUser = async (req, res) => {
 
     if (user) {
       bcrypt.compare(password, user.password, (err, result) => {
-        if (err) {
-          res.status(401).json({ errors: [{ message: "Incorrect password" }] });
-        } else {
-          res
+        if (result) {
+          return res
             .status(200)
             .json({ token: getToken(user.id, user.ispremiumuser) });
+        } else {
+          return res
+            .status(401)
+            .json({ errors: [{ message: "Incorrect password" }] });
         }
       });
     } else {
