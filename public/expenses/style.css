@@ -124,12 +124,15 @@ select {
 }
 
 .leadershipSection {
-  margin-top: 25px;
+  margin-top: 10px;
   /* background: #ff00000d; */
-  width: 50%;
+  width: 43%;
   display: none;
   text-align: center;
   border: solid black 1px;
+
+  vertical-align: top;
+  margin-left: 29px;
 }
 
 #leadershipList {

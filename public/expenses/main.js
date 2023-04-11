@@ -213,7 +213,7 @@ premiumBtn.addEventListener("click", async () => {
 
 leadershipBtn.addEventListener("click", async () => {
   if (leadershipList.style.display == "none") {
-    leadershipList.style.display = "block";
+    leadershipList.style.display = "display: inline-block";
     leadershipBtn.innerHTML = "Close Board";
     const result = await axios.get(
       "http://3.27.95.152:3000/premiumFeatures/leadership"
@@ -265,6 +265,7 @@ async function download() {
     }
   } catch (error) {
     console.log(error);
+    alert("download failed");
   }
 }
 
