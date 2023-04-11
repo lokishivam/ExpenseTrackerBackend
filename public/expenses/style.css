@@ -154,6 +154,7 @@ select {
   text-align: center;
   border: solid black 1px;
   margin-top: 10px;
+  display: inline-block;
 }
 
 .paginateButtonStyle {
