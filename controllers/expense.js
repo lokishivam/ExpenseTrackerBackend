@@ -126,7 +126,6 @@ exports.downloadExpenses = async (req, res) => {
     // console.log(instanceMethods);
 
     await req.user.createDownloadExpense({ link: fileUrl, name: fileName });
-
     console.log("5. adding data to the downloads table");
 
     const allExpenses = await req.user.getDownloadExpenses({
