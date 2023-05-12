@@ -11,7 +11,7 @@ async function formhandler(e) {
     };
 
     const data = await axios.post(
-      "http://3.27.95.152:3000/users/add-user",
+      "http://54.206.52.5:3000/users/add-user",
       obj
     );
     name.value = "";

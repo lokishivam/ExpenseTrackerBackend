@@ -37,7 +37,7 @@ exports.forgotPasswordHandler = async (req, res) => {
         subject: "Forgot Password",
         textContent: "check ",
         htmlContent: `<h1>Password reset</h1>
-        <a href="http://3.27.95.152:3000/password/resetPassword/${id}">Reset password</a>`,
+        <a href="http://54.206.52.5:3000/password/resetPassword/${id}">Reset password</a>`,
       };
 
       const sendEmailResponse = await apiInstance.sendTransacEmail(
@@ -70,7 +70,7 @@ exports.resetPasswordHandler = async (req, res) => {
         return res.status(200).send(`<html>
                               <h1>Link expired<h1>
                               <p>Try forgot password again</p>
-                              <a href = "http://3.27.95.152:5500/password/forgotPassword.html">frogot password</a>
+                              <a href = "http://54.206.52.5:5500/password/forgotPassword.html">frogot password</a>
                               </html>`);
         //**res.end();
         // When the first call to res.end() is executed,

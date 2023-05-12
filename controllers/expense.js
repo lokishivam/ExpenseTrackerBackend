@@ -70,7 +70,7 @@ exports.deleteExpense = async (req, res) => {
 //
 const uploadToS3 = async (data, fileName) => {
   try {
-    console.log("3.1 Entered into s3 function");
+    //console.log("3.1 Entered into s3 function");
     const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME;
     const AWS_IAM_ACCESS_KEY = process.env.AWS_IAM_ACCESS_KEY;
     const AWS_IAM_SECRET_KEY = process.env.AWS_IAM_SECRET_KEY;
@@ -93,7 +93,7 @@ const uploadToS3 = async (data, fileName) => {
         if (err) {
           reject(err);
         } else {
-          console.log("3.2 s3 response", s3response.Location);
+          //console.log("3.2 s3 response", s3response.Location);
           resolve(s3response.Location);
         }
       });
@@ -105,20 +105,20 @@ const uploadToS3 = async (data, fileName) => {
 
 exports.downloadExpenses = async (req, res) => {
   try {
-    console.log("1. enter downloads function");
+    //console.log("1. enter downloads function");
 
     const expenses = await req.user.getExpenses();
-    console.log("2. ", expenses);
+    //console.log("2. ", expenses);
 
     const fileName = `Expense${req.user.id}/
     ${new Date()}.txt`;
-    console.log("2.1 fileName : ", fileName);
+    //console.log("2.1 fileName : ", fileName);
 
     const stringifiedExpenses = JSON.stringify(expenses);
-    console.log("3. stringified ", stringifiedExpenses);
+    //console.log("3. stringified ", stringifiedExpenses);
 
     const fileUrl = await uploadToS3(stringifiedExpenses, fileName);
-    console.log("4. fileUrl ", fileUrl);
+    //console.log("4. fileUrl ", fileUrl);
 
     // const instanceMethods = Object.getOwnPropertyNames(
     //   Object.getPrototypeOf(req.user)
@@ -132,7 +132,7 @@ exports.downloadExpenses = async (req, res) => {
       attributes: ["link", "name"],
     });
 
-    console.log("6. all expenses", allExpenses);
+    //console.log("6. all expenses", allExpenses);
     res.status(201).json({ fileUrl, allExpenses });
   } catch (error) {
     console.log(error);
