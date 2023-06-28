@@ -105,34 +105,21 @@ const uploadToS3 = async (data, fileName) => {
 
 exports.downloadExpenses = async (req, res) => {
   try {
-    console.log("1. enter downloads function");
-
     const expenses = await req.user.getExpenses();
-    console.log("2. ", expenses);
 
     const fileName = `Expense${req.user.id}/
     ${new Date()}.txt`;
-    console.log("2.1 fileName : ", fileName);
 
     const stringifiedExpenses = JSON.stringify(expenses);
-    console.log("3. stringified ", stringifiedExpenses);
 
     const fileUrl = await uploadToS3(stringifiedExpenses, fileName);
-    console.log("4. fileUrl ", fileUrl);
-
-    // const instanceMethods = Object.getOwnPropertyNames(
-    //   Object.getPrototypeOf(req.user)
-    // );
-    // console.log(instanceMethods);
 
     await req.user.createDownloadExpense({ link: fileUrl, name: fileName });
-    console.log("5. adding data to the downloads table");
 
     const allExpenses = await req.user.getDownloadExpenses({
       attributes: ["link", "name"],
     });
 
-    console.log("6. all expenses", allExpenses);
     res.status(201).json({ fileUrl, allExpenses });
   } catch (error) {
     console.log(error);
@@ -142,10 +129,9 @@ exports.downloadExpenses = async (req, res) => {
 
 exports.getPaginatedExpenses = async (req, res) => {
   try {
-    console.log("entered into pagination");
     const user = req.user;
     const pageNo = Number(req.query.pageNo);
-    console.log("0. page no = ", pageNo);
+
     const limit = req.query.limit != "null" ? Number(req.query.limit) : 5; // number of items per page
     console.log(limit);
     const offset = (pageNo - 1) * limit; // calculate the offset based on the page number and limit
@@ -159,7 +145,6 @@ exports.getPaginatedExpenses = async (req, res) => {
       limit: limit,
       order: [["createdAt", "DESC"]], // order rows by createdAt field in descending order
     });
-    console.log("1. rows:", rows);
 
     const currentPage = pageNo;
     const hasNextPage = limit * pageNo < count; //total till this page < total
