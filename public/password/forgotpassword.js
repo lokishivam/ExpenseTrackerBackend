@@ -9,7 +9,7 @@ async function formhandler(e) {
     };
 
     const result = await axios.post(
-      "http://54.206.52.5:3000/password/forgotPassword",
+      "http://44.202.85.209:3000/password/forgotPassword",
       obj
     );
     message.classList.remove("errorMessage");

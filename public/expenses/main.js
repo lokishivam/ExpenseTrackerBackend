@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
     li.appendChild(del);
 
     const expense = await axios.post(
-      "http://54.206.52.5:3000/expenses/add-expense",
+      "http://44.202.85.209:3000/expenses/add-expense",
       data,
       {
         headers: { token: localStorage.getItem("token") },
@@ -68,7 +68,7 @@ expenseList.addEventListener("click", async (e) => {
       let li = e.target.parentElement;
       let id = li.id;
 
-      await axios.delete(`http://54.206.52.5:3000/expenses/delete/${id}`, {
+      await axios.delete(`http://44.202.85.209:3000/expenses/delete/${id}`, {
         headers: { token: localStorage.getItem("token") },
       });
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const res = await axios.get(
-      `http://54.206.52.5:3000/expenses/get-Paginated-expenses/?pageNo=1&limit=${localStorage.getItem(
+      `http://44.202.85.209:3000/expenses/get-Paginated-expenses/?pageNo=1&limit=${localStorage.getItem(
         "listRows"
       )}`,
       {
@@ -173,7 +173,7 @@ function paginateButtons(res, listPaginate) {
 premiumBtn.addEventListener("click", async () => {
   try {
     const result = await axios.get(
-      "http://54.206.52.5:3000/purchase/buy-premium",
+      "http://44.202.85.209:3000/purchase/buy-premium",
       {
         headers: { token: localStorage.getItem("token") },
       }
@@ -184,7 +184,7 @@ premiumBtn.addEventListener("click", async () => {
       order_id: result.data.order.id,
       handler: async (response) => {
         const update = await axios.post(
-          "http://54.206.52.5:3000/purchase/update-premium",
+          "http://44.202.85.209:3000/purchase/update-premium",
           {
             order_id: options.order_id,
             payment_id: response.razorpay_payment_id,
@@ -216,7 +216,7 @@ leadershipBtn.addEventListener("click", async () => {
     leadershipList.style.display = "block";
     leadershipBtn.innerHTML = "Close Board";
     const result = await axios.get(
-      "http://54.206.52.5:3000/premiumFeatures/leadership"
+      "http://44.202.85.209:3000/premiumFeatures/leadership"
     );
     const users = result.data;
     for (let user of users) {
@@ -241,7 +241,7 @@ async function download() {
 
     console.log("in download function");
     const response = await axios.get(
-      "http://54.206.52.5:3000/expenses/download",
+      "http://44.202.85.209:3000/expenses/download",
       {
         headers: { token: localStorage.getItem("token") },
       }
@@ -274,7 +274,7 @@ expenseListPaginate.addEventListener("click", async (e) => {
   if (e.target.classList.contains("paginateButtonStyle")) {
     const pageNo = e.target.innerHTML;
     const res = await axios.get(
-      `http://54.206.52.5:3000/expenses/get-Paginated-expenses/?pageNo=${pageNo}&limit=${localStorage.getItem(
+      `http://44.202.85.209:3000/expenses/get-Paginated-expenses/?pageNo=${pageNo}&limit=${localStorage.getItem(
         "listRows"
       )}`,
       {
